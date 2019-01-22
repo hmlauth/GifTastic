@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>HW Week 6 - GifTastic</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap Links-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <!-- CSS Link -->
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- JavaScript Link -->
+    <script src="assets/javascript/app.js"></script>
+    
+</head>
+<body>
+    
+<!-- Create HTML divs and input form -->
+
+    <!-- Create div for buttons -->
+    <div id="animal-buttons"></div>
+
+    <!-- Create HTML form for user input to add new animal buttons -->
+    <form id="animal-form">
+        <label for="animal-input">Try adding an animal!</label><br>
+        <input type="text" id="animal-input"><br>
+        <input type="submit" value="Submit" id="add-animal-button"><br>
+    </form>
+
+    <!-- Create divs for all animal Giphys -->
+    <div id="animal-giphys"></div>
+
+    <button>Practice Button</button>
+
+
+    <script>
+    // Event listener for all button elements
+    $("button").on("click", function() {
+
+        var corsAnywhereUrl = "https://cors-anywhere.herokuapp.com/";
+        // Constructing a URL to search Giphy for the name of the person who said the quote
+        var queryURL = corsAnywhereUrl + "https://api.giphy.com/v1/gifs/search?q=" + "&api_key=nNJaO7RRux2S8GgjGHR8eQiVlVx79M9r";
+
+        // Performing an AJAX request with the queryURL
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        })
+            // After data comes back from the request
+            .then(function(response) {
+            console.log(queryURL);
+            console.log(response);
+        });
+
+    });
+
+    </script>
+
+</body>
+</html>
