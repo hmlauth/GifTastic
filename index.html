@@ -23,28 +23,42 @@
 <!-- Create HTML divs and input form -->
 
     <!-- Create div for buttons -->
-    <div id="animal-buttons"></div>
+    <div id="emotional-buttons">
+
+    </div>
 
     <!-- Create HTML form for user input to add new animal buttons -->
-    <form id="animal-form">
-        <label for="animal-input">Try adding an animal!</label><br>
-        <input type="text" id="animal-input"><br>
-        <input type="submit" value="Submit" id="add-animal-button"><br>
+    <form id="emotional-form">
+        <label for="emotional-input">Try adding an animal!</label><br>
+        <input type="text" id="emotional-input"><br>
+        <input type="submit" value="Submit" id="add-emotional-button"><br>
     </form>
 
     <!-- Create divs for all animal Giphys -->
-    <div id="animal-giphys"></div>
+    <div id="emotional-giphys">
 
-    <button>Practice Button</button>
-
+    </div>
 
     <script>
+    // Populate buttons into "animal-buttons" div
+    var topics = ["happy", "sad", "angry"];
+
+        // Loop through topics array to place buttons for each on the page
+        $.each(topics, function(index,value) {
+            console.log(index + " " + value);
+            var emotionalButtons = $("<button>");
+            emotionalButtons.addClass("emotional-button-styling");
+            emotionalButtons.attr("data-emotion", [value]);
+            emotionalButtons.text(topics[index]);
+            $("#emotional-buttons").append(emotionalButtons);
+        });
+
     // Event listener for all button elements
     $("button").on("click", function() {
 
-        var corsAnywhereUrl = "https://cors-anywhere.herokuapp.com/";
+        var emotion = $(this).attr("data-emotion");
         // Constructing a URL to search Giphy for the name of the person who said the quote
-        var queryURL = corsAnywhereUrl + "https://api.giphy.com/v1/gifs/search?q=" + "&api_key=nNJaO7RRux2S8GgjGHR8eQiVlVx79M9r";
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + emotion + "&api_key=nNJaO7RRux2S8GgjGHR8eQiVlVx79M9r&limit=10";
 
         // Performing an AJAX request with the queryURL
         $.ajax({
@@ -55,6 +69,18 @@
             .then(function(response) {
             console.log(queryURL);
             console.log(response);
+            // De-reference data in response by stroig to variable "results"
+            var results = response.data;
+            var $emotionalDiv = $("<div>");
+            var $p = $("<p>").text("Rating " + results[i].rating);
+            console.log(results[i].rating);
+            var $emotionalGiphy = $("<img>");
+            $emotionalGiphy.attr("src", results[i].images.fixed_width.url);
+            console.log(results[i].images.fixed_width.url);
+            $emotionalDiv.append($emotionalGiphy);
+            $emotionalDiv.append($p);
+            $("#emotional-giphys").prepend($emotionalDiv);
+
         });
 
     });

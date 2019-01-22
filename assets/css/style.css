@@ -1,0 +1,9 @@
+.emotional-button-styling, #add-emotional-button {
+    margin: 10px;
+    color: blue;
+    border: 2px solid pink;
+}
+
+#emotional-form {
+    margin: 10px;
+}
