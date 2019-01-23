@@ -29,7 +29,7 @@
 
     <!-- Create HTML form for user input to add new animal buttons -->
     <form id="emotional-form">
-        <label for="emotional-input">Try adding an animal!</label><br>
+        <label for="emotional-input">Enter an emotion!</label><br>
         <input type="text" id="emotional-input"><br>
         <input type="submit" value="Submit" id="add-emotional-button"><br>
     </form>
@@ -41,9 +41,9 @@
 
     <script>
     // Populate buttons into "animal-buttons" div
-    var topics = ["happy", "sad", "angry"];
+    var topics = ["happy", "sad", "angry", "anxious", "hilarious", "envious", "jealous", "frozen", "scared", "cocky", "beautiful", "excited"];
 
-        // Loop through topics array to place buttons for each on the page
+        // Loop through topics array to place buttons for each on the page. Also adds attribute to each button using the actual value of the array versus the index number so that we can pull from this attribute when making our ajax request.
         $.each(topics, function(index,value) {
             console.log(index + " " + value);
             var emotionalButtons = $("<button>");
@@ -55,7 +55,7 @@
 
     // Event listener for all button elements
     $("button").on("click", function() {
-
+        // this refers to the attr data emotion. Anything clicked on that has data-emotion as an attribute will populate the queryURL which then moves through into ajax request and subsequent for loop to place all giphs related to the data onto the page.
         var emotion = $(this).attr("data-emotion");
         // Constructing a URL to search Giphy for the name of the person who said the quote
         var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + emotion + "&api_key=nNJaO7RRux2S8GgjGHR8eQiVlVx79M9r&limit=10";
@@ -69,20 +69,63 @@
             .then(function(response) {
             console.log(queryURL);
             console.log(response);
-            // De-reference data in response by stroig to variable "results"
+            // De-reference data in response by storing to variable "results"
             var results = response.data;
-            var $emotionalDiv = $("<div>");
-            var $p = $("<p>").text("Rating " + results[i].rating);
-            console.log(results[i].rating);
-            var $emotionalGiphy = $("<img>");
-            $emotionalGiphy.attr("src", results[i].images.fixed_width.url);
-            console.log(results[i].images.fixed_width.url);
-            $emotionalDiv.append($emotionalGiphy);
-            $emotionalDiv.append($p);
-            $("#emotional-giphys").prepend($emotionalDiv);
 
+            // Looping through each result item to grab and then place on page.
+            for (var i = 0; i < results.length; i++) {
+                // Create div for all giphs and respective information about them (Ratings) to be appended too.
+                var $emotionalDiv = $("<div>");
+                // Create paragraph html element and place Rating of giph inside
+                var $p = $("<p>").text("Rating " + results[i].rating);
+                console.log(results[i].rating);
+                // Create image div
+                var $emotionalGiphy = $("<img>");
+                // Add "src" attribute to image element and pull url from results placing still image of giphy
+                $emotionalGiphy.attr("src", results[i].images.fixed_width_still.url);
+                console.log(results[i].images.fixed_width_still.url);
+                // Add "data-state" attribute to image element called "data-still" so we can reference this later to stop and start giphy
+                $emotionalGiphy.attr("data-still", results[i].images.fixed_width_still.url);
+                // Add "data-state" attribute to image element called "data-animate" so we can reference this later to stop and start giphy
+                $emotionalGiphy.attr("data-animate", results[i].images.fixed_width.url);
+                // Add "data-state" attribute called "still" 
+                $emotionalGiphy.attr("data-state", "still");
+                // Add class to reference later to stop and start giphy
+                $emotionalGiphy.addClass("gif");
+                // Append div with giphy and paragraph text
+                $emotionalDiv.append($emotionalGiphy);
+                $emotionalDiv.append($p);
+                // Prepend div containing giphy and paragraph text to hardcoded div in HTML. Use Prepend so the div is added to the beginning of the div not at the end. 
+                $("#emotional-giphys").prepend($emotionalDiv);
+
+            };
+
+            // Create on click function so that when a .gif is clicked the gif will change from still to animated and visa versa
+            $(".gif").on("click", function() {
+                // Create variable to reference the attribute "data-state" on the object we're clicking
+                var state = $(this).attr("data-state");
+                console.log(state);
+                // Create if/else condition so that the gif knows when to change from still to animate and visa versa. Because the initial source is the still image, we need to first state that...
+                // IF the "data-state" is "still" then...
+                if (state === "still") {
+                // ...change out the "src" of the image to the animated url
+                    $(this).attr("src", $(this).attr("data-animate"));
+                    // then, set/update "data-state" to "animate"
+                    $(this).attr("data-state", "animate");
+                    } else {
+                        // if the gif is NOT still then we want to make it still on click of it; change out the src attribute for the still url
+                        $(this).attr("src", $(this).attr("data-still"));
+                        // then, set/update "data-state" back to "still"
+                        $(this).attr("data-state", "still");
+                        }
+            
+            // on click closing bracket for changing "data-states" if gifs
+            });
+        
+        // ajax request closing bracket
         });
 
+    // on click closing bracket
     });
 
     </script>
