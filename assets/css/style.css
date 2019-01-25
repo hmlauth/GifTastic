@@ -1,9 +1,27 @@
+body {
+    background: hsl(256, 100%, 50%);
+    color: white;
+}
+
+.content-container {
+    background: rgba(255, 255, 255, 0.6);
+
+}
+
 .emotional-button-styling, #add-emotional-button {
-    margin: 10px;
+    margin: 5px;
     color: blue;
     border: 2px solid pink;
 }
 
+#emotional-giphys {
+    display: inline-block;
+}
+
 #emotional-form {
-    margin: 10px;
+
+}
+
+.gif, p {
+    
 }
