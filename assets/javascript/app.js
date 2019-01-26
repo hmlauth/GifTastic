@@ -5,7 +5,7 @@ var queryURLBase = "https://api.giphy.com/v1/gifs/search?api_key=nNJaO7RRux2S8Gg
 console.log("queryURLBase: " + queryURLBase);
 
 // Populate buttons into "animal-buttons" div
-var topics = ["happy", "sad", "angry", "anxious", "hilarious", "jealous", "cocky", "excited"];
+var topics = ["happy", "sad", "angry", "anxious", "peaceful", "jealous", "cocky", "excited"];
 
 function runQuery(input) {
     // Performing an AJAX request with the queryURL
@@ -22,7 +22,7 @@ function runQuery(input) {
 
             // Create div for all giphs and respective information about them (Ratings) to be appended too.
             var $emotionalDiv = $("<div>");
-            $emotionalDiv.attr("id", "gif-div");
+            $emotionalDiv.addClass("gif-img");
             // Create paragraph html element and place Rating of giph inside
             var $p = $("<p>").text("Rating " + results[i].rating);
             // Create image div
@@ -30,7 +30,7 @@ function runQuery(input) {
             // Add "src" attribute to image element and pull url from results placing still image of giphy
             $emotionalGiphy.attr("src", results[i].images.fixed_width_still.url);
             // Add width 100% for styling/layout purposes
-            $emotionalGiphy.attr("style", "width:100%");
+            // $emotionalGiphy.attr("style", "width:100%");
             // Add "data-state" attribute to image element called "data-still" so we can reference this later to stop and start giphy
             $emotionalGiphy.attr("data-still", results[i].images.fixed_width_still.url);
             // Add "data-state" attribute to image element called "data-animate" so we can reference this later to stop and start giphy
@@ -42,17 +42,7 @@ function runQuery(input) {
             // Append div with giphy and paragraph text
             $emotionalDiv.append($emotionalGiphy);
             $emotionalDiv.append($p);
-            
-            if (i === 0 || i === 1 || i === 2) {
-            // Prepend div containing giphy and paragraph text to hardcoded div in HTML. Use Prepend so the div is added to the beginning of the div not at the end. 
-            $("#first-gif-column").prepend($emotionalDiv);
-            } else if (i === 3 || i === 4 || i === 5) {
-                $("#second-gif-column").prepend($emotionalDiv);
-            } else if (i === 6 || i === 7 || i === 8) {
-                $("#third-gif-column").prepend($emotionalDiv);
-            } else {
-                $("#fourth-gif-column").prepend($emotionalDiv);
-            };
+            $("#emotional-giphys").append($emotionalDiv);
         };
 
         animateGif();
@@ -62,6 +52,7 @@ function runQuery(input) {
 
 
 function addButton(input) {
+    $("#emotional-buttons").empty();
     // Loop through topics array to place buttons for each on the page. Also adds attribute to each button using the actual value of the array versus the index number so that we can pull from this attribute when making our ajax request.
     $.each(input, function (index, value) {
         console.log(index + " " + value);
@@ -103,11 +94,8 @@ addButton(topics);
 
 // CALL QUERY
 $(".emotional-button").on("click", function () {
-    // Clear/empty previous set of giphys from "emotional-giphys" div
-    $("#first-gif-column").empty();
-    $("#second-gif-column").empty();
-    $("#third-gif-column").empty();
-    $("#fourth-gif-column").empty();
+    // Empty emotional gifs div
+    $("#emotional-giphys").empty();
     // this refers to the attr data emotion. Anything clicked on that has data-emotion as an attribute will populate the queryURL which then moves through into ajax request and subsequent for loop to place all giphs related to the data onto the page.
     var emotion = $(this).attr("data-emotion");
     // Constructing a URL to search Giphy for the name of the person who said the quote
@@ -124,6 +112,9 @@ $("#add-emotional-button").on("click", function () {
 
     // var newEmotionArray = [];
     // newEmotionArray.push(newEmotion);
+    topics.push(newEmotion);
+    addButton(topics);
+
     queryURLBase = queryURLBase + "&q=" + newEmotion
     runQuery(queryURLBase);
 
