@@ -30,13 +30,15 @@ body {
     position: relative;
 }
 
-#emotional-input {
-
-}
-
 p {
     font-style: italic;
 }
 
 /* COLUMN & ROW STYLING */
+.gif {
+    height: 100px;
+}
 
+.gif-img {
+    margin: 5px;
+}

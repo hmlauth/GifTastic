@@ -20,6 +20,7 @@ function runQuery(input) {
         // FOR LOOP ADDING GIFS TO PAGE
         for (var i = 0; i < results.length; i++) {
 
+            $("#emotional-giphys").addClass("d-flex flex-wrap");
             // Create div for all giphs and respective information about them (Ratings) to be appended too.
             var $emotionalDiv = $("<div>");
             $emotionalDiv.addClass("gif-img");
@@ -46,7 +47,7 @@ function runQuery(input) {
         };
 
         animateGif();
-    
+
     });
 };
 
@@ -91,17 +92,20 @@ function animateGif() {
 };
 
 addButton(topics);
+pullQuery(topics);
 
 // CALL QUERY
-$(".emotional-button").on("click", function () {
-    // Empty emotional gifs div
-    $("#emotional-giphys").empty();
-    // this refers to the attr data emotion. Anything clicked on that has data-emotion as an attribute will populate the queryURL which then moves through into ajax request and subsequent for loop to place all giphs related to the data onto the page.
-    var emotion = $(this).attr("data-emotion");
-    // Constructing a URL to search Giphy for the name of the person who said the quote
-    queryURLBase = queryURLBase + "&q=" + emotion;
-    runQuery(queryURLBase);
-});
+function pullQuery(input) {
+    $(".emotional-button").on("click", function () {
+        // Empty emotional gifs div
+        $("#emotional-giphys").empty();
+        // this refers to the attr data emotion. Anything clicked on that has data-emotion as an attribute will populate the queryURL which then moves through into ajax request and subsequent for loop to place all giphs related to the data onto the page.
+        var emotion = $(this).attr("data-emotion");
+        // Constructing a URL to search Giphy for the name of the person who said the quote
+        queryURLBase = queryURLBase + "&q=" + emotion;
+        runQuery(queryURLBase);
+    });
+};
 
 // ADDING EMOTIONAL BUTTON
 $("#add-emotional-button").on("click", function () {
@@ -110,16 +114,16 @@ $("#add-emotional-button").on("click", function () {
     var newEmotion = $("#emotional-input").val().trim();
     console.log("newEmotion: " + newEmotion);
 
-    // var newEmotionArray = [];
-    // newEmotionArray.push(newEmotion);
     topics.push(newEmotion);
     addButton(topics);
 
-    queryURLBase = queryURLBase + "&q=" + newEmotion
-    runQuery(queryURLBase);
+    // queryURLBase = queryURLBase + "&q=" + newEmotion;
+    // runQuery(queryURLBase);
+
+    pullQuery(newEmotion);
 
     return false;
 
-    
+
 
 });
