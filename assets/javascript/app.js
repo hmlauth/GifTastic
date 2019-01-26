@@ -29,6 +29,8 @@ function runQuery(input) {
             var $emotionalGiphy = $("<img>");
             // Add "src" attribute to image element and pull url from results placing still image of giphy
             $emotionalGiphy.attr("src", results[i].images.fixed_width_still.url);
+            // Add width 100% for styling/layout purposes
+            $emotionalGiphy.attr("style", "width:100%");
             // Add "data-state" attribute to image element called "data-still" so we can reference this later to stop and start giphy
             $emotionalGiphy.attr("data-still", results[i].images.fixed_width_still.url);
             // Add "data-state" attribute to image element called "data-animate" so we can reference this later to stop and start giphy
@@ -40,8 +42,17 @@ function runQuery(input) {
             // Append div with giphy and paragraph text
             $emotionalDiv.append($emotionalGiphy);
             $emotionalDiv.append($p);
+            
+            if (i === 0 || i === 1 || i === 2) {
             // Prepend div containing giphy and paragraph text to hardcoded div in HTML. Use Prepend so the div is added to the beginning of the div not at the end. 
-            $("#emotional-giphys").prepend($emotionalDiv);
+            $("#first-gif-column").prepend($emotionalDiv);
+            } else if (i === 3 || i === 4 || i === 5) {
+                $("#second-gif-column").prepend($emotionalDiv);
+            } else if (i === 6 || i === 7 || i === 8) {
+                $("#third-gif-column").prepend($emotionalDiv);
+            } else {
+                $("#fourth-gif-column").prepend($emotionalDiv);
+            };
         };
 
         animateGif();
@@ -93,7 +104,10 @@ addButton(topics);
 // CALL QUERY
 $(".emotional-button").on("click", function () {
     // Clear/empty previous set of giphys from "emotional-giphys" div
-    $("#emotional-giphys").empty();
+    $("#first-gif-column").empty();
+    $("#second-gif-column").empty();
+    $("#third-gif-column").empty();
+    $("#fourth-gif-column").empty();
     // this refers to the attr data emotion. Anything clicked on that has data-emotion as an attribute will populate the queryURL which then moves through into ajax request and subsequent for loop to place all giphs related to the data onto the page.
     var emotion = $(this).attr("data-emotion");
     // Constructing a URL to search Giphy for the name of the person who said the quote
@@ -108,10 +122,10 @@ $("#add-emotional-button").on("click", function () {
     var newEmotion = $("#emotional-input").val().trim();
     console.log("newEmotion: " + newEmotion);
 
-    var newEmotionArray = [];
-    newEmotionArray.push(newEmotion);
-
-    addButton(newEmotion);
+    // var newEmotionArray = [];
+    // newEmotionArray.push(newEmotion);
+    queryURLBase = queryURLBase + "&q=" + newEmotion
+    runQuery(queryURLBase);
 
     return false;
 
