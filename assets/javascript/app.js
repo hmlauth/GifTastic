@@ -13,7 +13,6 @@ function runQuery(input) {
         url: input,
         method: "GET"
     }).then(function (response) {
-        console.log(response)
 
         // De-reference data in response by storing to variable "results"
         var results = response.data;
@@ -23,14 +22,13 @@ function runQuery(input) {
 
             // Create div for all giphs and respective information about them (Ratings) to be appended too.
             var $emotionalDiv = $("<div>");
+            $emotionalDiv.attr("id", "gif-div");
             // Create paragraph html element and place Rating of giph inside
             var $p = $("<p>").text("Rating " + results[i].rating);
-            console.log(results[i].rating);
             // Create image div
             var $emotionalGiphy = $("<img>");
             // Add "src" attribute to image element and pull url from results placing still image of giphy
             $emotionalGiphy.attr("src", results[i].images.fixed_width_still.url);
-            console.log(results[i].images.fixed_width_still.url);
             // Add "data-state" attribute to image element called "data-still" so we can reference this later to stop and start giphy
             $emotionalGiphy.attr("data-still", results[i].images.fixed_width_still.url);
             // Add "data-state" attribute to image element called "data-animate" so we can reference this later to stop and start giphy
@@ -45,36 +43,27 @@ function runQuery(input) {
             // Prepend div containing giphy and paragraph text to hardcoded div in HTML. Use Prepend so the div is added to the beginning of the div not at the end. 
             $("#emotional-giphys").prepend($emotionalDiv);
         };
+
+        animateGif();
+    
     });
 };
 
 
-function addButton() {
+function addButton(input) {
     // Loop through topics array to place buttons for each on the page. Also adds attribute to each button using the actual value of the array versus the index number so that we can pull from this attribute when making our ajax request.
-    $.each(topics, function (index, value) {
+    $.each(input, function (index, value) {
         console.log(index + " " + value);
         var emotionalButtons = $("<button>");
         emotionalButtons.addClass("emotional-button emotional-button-styling btn-lg");
         emotionalButtons.attr("type", "button");
         emotionalButtons.attr("data-emotion", [value]);
-        emotionalButtons.text(topics[index]);
+        emotionalButtons.text(input[index]);
         $("#emotional-buttons").append(emotionalButtons);
     });
 };
 
-addButton();
-
-// Event listener for all button elements
-$(".emotional-button").on("click", function () {
-    // Clear/empty previous set of giphys from "emotional-giphys" div
-    $("#emotional-giphys").empty();
-    // this refers to the attr data emotion. Anything clicked on that has data-emotion as an attribute will populate the queryURL which then moves through into ajax request and subsequent for loop to place all giphs related to the data onto the page.
-    var emotion = $(this).attr("data-emotion");
-    // Constructing a URL to search Giphy for the name of the person who said the quote
-    queryURLBase = queryURLBase + "&q=" + emotion;
-
-    runQuery(queryURLBase);
-    console.log(queryURLBase);
+function animateGif() {
 
     // ANIMATE LOGIC - When gif is clicked change from still <-> animate
     $(".gif").on("click", function () {
@@ -97,10 +86,20 @@ $(".emotional-button").on("click", function () {
 
         // on .gif closing bracket for changing "data-states" if gifs
     });
+};
 
-    // on .emotional-buttons click closing bracket
+addButton(topics);
+
+// CALL QUERY
+$(".emotional-button").on("click", function () {
+    // Clear/empty previous set of giphys from "emotional-giphys" div
+    $("#emotional-giphys").empty();
+    // this refers to the attr data emotion. Anything clicked on that has data-emotion as an attribute will populate the queryURL which then moves through into ajax request and subsequent for loop to place all giphs related to the data onto the page.
+    var emotion = $(this).attr("data-emotion");
+    // Constructing a URL to search Giphy for the name of the person who said the quote
+    queryURLBase = queryURLBase + "&q=" + emotion;
+    runQuery(queryURLBase);
 });
-
 
 // ADDING EMOTIONAL BUTTON
 $("#add-emotional-button").on("click", function () {
@@ -109,15 +108,13 @@ $("#add-emotional-button").on("click", function () {
     var newEmotion = $("#emotional-input").val().trim();
     console.log("newEmotion: " + newEmotion);
 
-    topics.push(newEmotion);
-    console.log("Topics: " + topics);
+    var newEmotionArray = [];
+    newEmotionArray.push(newEmotion);
 
-    // var newURL = queryURL + "&q=" + newEmotion;
-    // console.log("newURL: " + newURL);
-
-    // runQuery(newEmotion, newUrl);
-    // addButton();
+    addButton(newEmotion);
 
     return false;
+
+    
 
 });

@@ -1,27 +1,39 @@
 body {
-    background: hsl(256, 100%, 50%);
+    background-image: url("https://images.pexels.com/photos/1598366/pexels-photo-1598366.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500");
+    background-repeat: repeat;
     color: white;
 }
 
 .content-container {
     background: rgba(255, 255, 255, 0.6);
+    margin-top: 30px;
+}
 
+#emotional-buttons {
+    margin: 20px;
+    text-align: center;
 }
 
 .emotional-button-styling, #add-emotional-button {
     margin: 5px;
-    color: blue;
     border: 2px solid pink;
 }
 
 #emotional-giphys {
-    display: inline-block;
+    margin: 20px;
+    padding: 20px;
 }
 
 #emotional-form {
+    margin: 20px;
+    padding: 20px;
+    position: relative;
+}
+
+#emotional-input {
 
 }
 
-.gif, p {
-    
+p {
+    font-style: italic;
 }
