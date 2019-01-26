@@ -15,7 +15,9 @@
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
-    <!-- CSS Link -->
+    <!-- GOOGLE FONT LINK -->
+    <link href="https://fonts.googleapis.com/css?family=Caveat" rel="stylesheet">
+        <!-- CSS Link -->
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
 
 
@@ -24,29 +26,33 @@
 <body>
     <div class="container content-container">
 
-        <!-- Create HTML divs and input form -->
-
-        <div class="row">
-            <div class="col-lg">
-                <!-- Create div for buttons -->
-                <div id="emotional-buttons"></div>
-            </div>
+        <div class="heading-container">
+            <h3>Need to <span id="express">express</span> yourself?</h3><br>
+            <h4><em>Add</em> an emotion. . .<br> <em>Click</em> a button. . . <br>then <em>Choose</em> from the
+                selection of gifs!</h4>
         </div>
 
-        <div class="row">
-            <div class="col-lg-3 col-md-3">
-                <!-- Create HTML form for user input to add new buttons -->
-                <form id="emotional-form">
-                    <label for="emotional-input">Enter an emotion!</label><br>
-                    <input type="text" id="emotional-input"><br>
-                    <input type="submit" value="Submit" class="btn-lg" id="add-emotional-button"><br>
-                </form>
+        <div class="form-container">
+            <!-- Create HTML form for user input to add new buttons -->
+            <form id="emotional-form">
+                <label for="emotional-input">
+                </label><br>
+                <input type="text" id="emotional-input"><br>
+                <input type="submit" value="Add an emotion!" class="btn-lg" id="add-emotional-button"><br>
+            </form>
+        </div>
+
+        <!-- BUTTON CONTAINER-->
+        <div class="emotional-button-container">
+            <div id="emotional-buttons"></div>
+        </div>
+
+        <!-- GIF CONTAINER -->
+        <div class="emotional-gif-container">
+            <div id="gif-instructions">
+                <h5>~ Click an image to animate it! ~</h5>
             </div>
-            <div class="col-lg-9 col-md-9">
-                <!-- Create divs for all gifs -->
-                <div id="emotional-giphys"></div>
-                </div>
-            </div>
+            <div id="emotional-giphys"></div>
         </div>
 
         <!-- Container closing div -->

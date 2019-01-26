@@ -27,7 +27,6 @@ body {
 #emotional-form {
     margin: 20px;
     padding: 20px;
-    position: relative;
 }
 
 p {
@@ -36,9 +35,36 @@ p {
 
 /* COLUMN & ROW STYLING */
 .gif {
-    height: 100px;
+    height: 175px;
+    border: 2px solid white;
 }
 
-.gif-img {
-    margin: 5px;
+.gif-img-div {
+    margin: 10px;
 }
+
+.heading-container {
+    padding-top: 30px;
+}
+
+.form-container, .heading-container {
+    text-align: center;
+}
+
+#express {
+    color: black;
+    font-family: 'Caveat', cursive;
+    font-size: 75px;
+}
+
+em {
+    color: pink;
+}
+
+h5 {
+    text-align: center;
+    color: rgb(192, 100, 116);
+    font-style: italic;
+    font-size: 16px;
+}
+

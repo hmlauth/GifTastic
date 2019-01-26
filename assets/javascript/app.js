@@ -16,6 +16,7 @@ function runQuery(input) {
 
         // De-reference data in response by storing to variable "results"
         var results = response.data;
+        console.log(results);
 
         // FOR LOOP ADDING GIFS TO PAGE
         for (var i = 0; i < results.length; i++) {
@@ -23,7 +24,7 @@ function runQuery(input) {
             $("#emotional-giphys").addClass("d-flex flex-wrap");
             // Create div for all giphs and respective information about them (Ratings) to be appended too.
             var $emotionalDiv = $("<div>");
-            $emotionalDiv.addClass("gif-img");
+            $emotionalDiv.addClass("gif-img-div");
             // Create paragraph html element and place Rating of giph inside
             var $p = $("<p>").text("Rating " + results[i].rating);
             // Create image div
