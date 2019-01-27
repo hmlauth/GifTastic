@@ -1,7 +1,7 @@
 # GifTastic
 
 ## What's this project about?
-This project was designed to learn about the functionality and benefits of APIs. APIs are a tremendously powerful building block that both facilitates the ease of design for the developer and also makes for a more enriching and dynamic experience for the user. 
+This project was designed to learn about the functionality and benefits of APIs. APIs are a tremendously powerful building blocks that both facilitate the ease of design for the developer and also make for a more enriching and dynamic experience for the user. 
 
  _**Emotions**_ was the theme I chose for this assignment as one tends to go through a roller coaster of emotions while learning code!
  
