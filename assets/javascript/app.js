@@ -1,3 +1,4 @@
+// HOME PAGE
 // SETUP VARIABLES
 // =====================================================================
 
@@ -29,6 +30,13 @@ function runQuery(input) {
             // Create div for all giphs and respective information about them (Ratings) to be appended too.
             var $emotionalDiv = $("<div>");
             $emotionalDiv.addClass("gif-img-div");
+
+            // Create "favorites" button
+            var $favorite = $("<button>");
+            $favorite.addClass("add-favorite-button");
+            $favorite.html("<span>&#x2606;</span>");
+            $favorite.attr("data-favorite", results[i].id);
+
             // Create paragraph html element and place Rating of giph inside
             var $p = $("<p>").text("Rating " + results[i].rating);
             // Create image div
@@ -47,6 +55,7 @@ function runQuery(input) {
             $emotionalGiphy.addClass("gif");
             // Append div with giphy and paragraph text
             $emotionalDiv.append($emotionalGiphy);
+            $p.append($favorite);
             $emotionalDiv.append($p);
             $("#emotional-giphys").append($emotionalDiv);
         };
@@ -137,3 +146,15 @@ $("#add-emotional-button").on("click", function () {
     }
 
 });
+
+// FAVORITES PAGE - Work in Progress! :D 
+
+// function saveFavorite (input) {
+    
+// }
+
+// $(".add-favorite-button").on("click", function() {
+//     console.log("Saved to favorites!")
+//     alert("Saved to favorites!");
+
+// });

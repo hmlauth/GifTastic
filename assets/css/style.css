@@ -1,3 +1,5 @@
+/* HOME PAGE STYLING */
+/* ====================================== */
 /* BODY STYLING */
 body {
     background-image: url("https://images.pexels.com/photos/1598366/pexels-photo-1598366.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500");
@@ -61,6 +63,7 @@ h5 {
 .gif {
     height: 175px;
     border: 2px solid white;
+    margin-bottom: 5px;
 }
 
 p {
@@ -70,4 +73,43 @@ p {
 #emotional-giphys {
     margin: 20px;
     padding: 20px;
+}
+
+/* NAVIGATION */
+.nav {
+    padding-top: 20px;
+    padding-right: 20px;
+}
+
+.nav-link {
+    color: rgb(212, 255, 192);
+}
+
+/* FOOTER */
+footer {
+    background-color: rgb(212, 255, 192);
+    border-top: 5px solid black;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    font-size: small;
+    margin-top: 10px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: black;
+}
+
+/* FAVORITES PAGE STYLING */
+/* ====================================== */
+
+.favorites {
+    border: 2px solid pink;
+
+}
+
+.add-favorite-button {
+    float: right;
+    background: rgb(255, 214, 221);
 }
