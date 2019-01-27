@@ -1,12 +1,16 @@
 // SETUP VARIABLES
 // =====================================================================
-// var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=nNJaO7RRux2S8GgjGHR8eQiVlVx79M9r&limit=10";
+
+// QUERY
 var queryURLBase = "https://api.giphy.com/v1/gifs/search?api_key=nNJaO7RRux2S8GgjGHR8eQiVlVx79M9r&limit=10";
 console.log("queryURLBase: " + queryURLBase);
 
-// Populate buttons into "animal-buttons" div
-var topics = ["happy", "sad", "angry", "anxious", "peaceful", "jealous", "cocky", "excited"];
+// TOPICS ARRAY
+var topics = ["happy", "sad", "angry", "anxious", "peaceful"];
 
+// FUNCTIONS
+// =====================================================================
+// AJAX REQUEST & ASSIGNMENT TO BUTTONS
 function runQuery(input) {
     // Performing an AJAX request with the queryURL
     $.ajax({
@@ -52,7 +56,7 @@ function runQuery(input) {
     });
 };
 
-
+// ADD NEW BUTTON
 function addButton(input) {
     $("#emotional-buttons").empty();
     // Loop through topics array to place buttons for each on the page. Also adds attribute to each button using the actual value of the array versus the index number so that we can pull from this attribute when making our ajax request.
@@ -67,6 +71,7 @@ function addButton(input) {
     });
 };
 
+// ANIMATE GIF
 function animateGif() {
 
     // ANIMATE LOGIC - When gif is clicked change from still <-> animate
@@ -92,6 +97,8 @@ function animateGif() {
     });
 };
 
+// METHODS
+// =====================================================================
 addButton(topics);
 pullQuery(topics);
 
@@ -110,21 +117,23 @@ function pullQuery(input) {
 
 // ADDING EMOTIONAL BUTTON
 $("#add-emotional-button").on("click", function () {
-
+    
     // Retrive user input
     var newEmotion = $("#emotional-input").val().trim();
-    console.log("newEmotion: " + newEmotion);
+    
+    $("#emotional-input").val(" ");
+    console.log( newEmotion);
+    if(newEmotion != ""){
 
     topics.push(newEmotion);
     addButton(topics);
-
-    // queryURLBase = queryURLBase + "&q=" + newEmotion;
-    // runQuery(queryURLBase);
-
     pullQuery(newEmotion);
 
     return false;
 
-
+    } else {
+        alert("Please enter an emotion")
+        event.preventDefault();
+    }
 
 });

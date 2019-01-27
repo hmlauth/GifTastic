@@ -1,3 +1,4 @@
+/* BODY STYLING */
 body {
     background-image: url("https://images.pexels.com/photos/1598366/pexels-photo-1598366.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500");
     background-repeat: repeat;
@@ -9,6 +10,7 @@ body {
     margin-top: 30px;
 }
 
+/* BUTTON STYLING */
 #emotional-buttons {
     margin: 20px;
     text-align: center;
@@ -19,28 +21,10 @@ body {
     border: 2px solid pink;
 }
 
-#emotional-giphys {
-    margin: 20px;
-    padding: 20px;
-}
-
+/* FORM & CONTAINER STYLING */
 #emotional-form {
     margin: 20px;
     padding: 20px;
-}
-
-p {
-    font-style: italic;
-}
-
-/* COLUMN & ROW STYLING */
-.gif {
-    height: 175px;
-    border: 2px solid white;
-}
-
-.gif-img-div {
-    margin: 10px;
 }
 
 .heading-container {
@@ -51,6 +35,7 @@ p {
     text-align: center;
 }
 
+/* TEXT STYLING */
 #express {
     color: black;
     font-family: 'Caveat', cursive;
@@ -63,8 +48,26 @@ em {
 
 h5 {
     text-align: center;
-    color: rgb(192, 100, 116);
+    color: rgb(155, 82, 94);
     font-style: italic;
     font-size: 16px;
 }
 
+/* GIF STYLING */
+.gif-img-div {
+    margin: 10px;
+}
+
+.gif {
+    height: 175px;
+    border: 2px solid white;
+}
+
+p {
+    font-style: italic;
+}
+
+#emotional-giphys {
+    margin: 20px;
+    padding: 20px;
+}
