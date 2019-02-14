@@ -8,8 +8,9 @@ This project was designed to learn about the functionality and benefits of APIs.
   * :sunglasses: Click any button to access 10 gifs. 
   * :relaxed: Search new emotions by adding a button. 
   * :weary: _HINT: Trying adding **frustrated** to see some hilarious gifs that I'm sure you can relate too!_
-  * :dancer: Have fun! Feel expressed! 
-  https://hmlauth.github.io/GifTastic/
+  * :dancer: Have fun! Feel expressed!</br>
+  </br>
+<strong>Link:</strong> https://hmlauth.github.io/GifTastic/
   
 ### Work-in-Progress Items
 
