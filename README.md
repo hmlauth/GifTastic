@@ -9,7 +9,8 @@ This project was designed to learn about the functionality and benefits of APIs.
   * :relaxed: Search new emotions by adding a button. 
   * :weary: _HINT: Trying adding **frustrated** to see some hilarious gifs that I'm sure you can relate too!_
   * :dancer: Have fun! Feel expressed! 
-
+  https://hmlauth.github.io/GifTastic/
+  
 ### Work-in-Progress Items
 
 1. Allowing users to add their favorite gifs to a favorites section or page. As I start learning more about data persistence, I will try making this section persist even when the page is reloaded (via `localStorage` or `cookies`). 
